@@ -1,0 +1,25 @@
+.main {
+  display: grid;
+  place-items: center;
+  place-content: center;
+  align-self: start;
+  gap: 15px;
+  padding: 10px;
+}
+
+.form {
+  display: grid;
+  place-items: center;
+  place-content: center;
+  gap: 15px;
+}
+
+.input {
+  height: 36px;
+  border: 3px solid black;
+  border-radius: 11px;
+  padding: 0 5px;
+  width: 275px;
+  text-align: center;
+  font-size: medium;
+}

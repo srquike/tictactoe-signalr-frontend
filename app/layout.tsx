@@ -21,7 +21,7 @@ export default function RootLayout({
         <header>
           <Image src={logo} height={200} width={200} alt="" />
           <h1>Tic-Tac-Toe SignalR</h1>
-          <p>Es un juego que utiliza React+NextJS, SignalR y ASP.NET Core para conectar jugadores en tiempo real.</p>
+          <p>Es un juego que utiliza React + Next.js, SignalR y ASP.NET Core para conectar jugadores en tiempo real.</p>
         </header>
         {children}
         <footer>Tic-Tac-Toe SignalR &copy; 2023</footer>

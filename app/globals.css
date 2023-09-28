@@ -45,6 +45,18 @@ a {
   line-height: 36px;
 }
 
-p {
+button {
+  color: white;
+  background-color: black;
+  border-radius: 11px;
+  font-size: small;
+  font-size: small;
+  width: 84px;
+  text-align: center;
+  height: 36px;
+  border: 0;
+}
+
+p, h1 {
   text-align: center;
 }
