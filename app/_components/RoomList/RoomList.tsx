@@ -18,7 +18,7 @@ export default function RoomList() {
           <td>Jugador 1</td>
           <td>Hace 1 minuto</td>
           <td align="right">
-            <Link href={"/join"}>Unirse</Link>
+            <Link href={"/join-room?id=KLJASDJKI"}>Unirse</Link>
           </td>
         </tr>
         <tr>
@@ -26,7 +26,7 @@ export default function RoomList() {
           <td>Jugador 1, Jugador 2</td>
           <td>Hace 2 minutos</td>
           <td align="right">
-            <Link href={"/join"}>Llena</Link>
+            <Link href={"#!"}>Llena</Link>
           </td>
         </tr>
       </tbody>
