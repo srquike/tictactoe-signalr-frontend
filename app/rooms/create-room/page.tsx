@@ -3,37 +3,19 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
+import JoinPlayerForm from "@/app/_components/JoinPlayerForm/JoinPlayerForm";
+import { validatePlayerName } from "@/app/_tools/validations";
 
 export default function CreateRoom() {
-  const [form, setForm] = useState({ playerName: "" });
   const [isCreating, setIsCreating] = useState(false);
   const [message, setMessage] = useState("");
+
   const router = useRouter();
 
-  async function handleOnSubmit(event: React.FormEvent) {
+  function handleOnSubmit(event: React.FormEvent, playerName: string) {
     event.preventDefault();
-    if (validatePlayerName(form.playerName)) {
+    if (validatePlayerName(playerName)) {
       setIsCreating(true);
-      const response = await fetch("");
-      if (response.ok) {
-        // Llamar al metodo On de SignalR
-        router.push("/room?id=");
-      }
-    }
-  }
-
-  function handleOnChange(event: React.ChangeEvent<HTMLInputElement>) {
-    const { name, value } = event.target;
-    setForm((currentForm) => ({ ...currentForm, [name]: value }));
-  }
-
-  function validatePlayerName(playerName: string): boolean {
-    if (playerName.length >= 3 && playerName.length <= 10) {
-        setMessage("");
-        return true;
-    } else {
-        setMessage("Tu nombre de jugador debe contener entre 3 y 10 letras");
-        return false
     }
   }
 
@@ -43,21 +25,10 @@ export default function CreateRoom() {
       {isCreating ? (
         <p>Creando sala, por favor espera...</p>
       ) : (
-        <form className={styles.form} onSubmit={handleOnSubmit}>
-          <input
-            className={styles.input}
-            value={form.playerName}
-            onChange={handleOnChange}
-            type="text"
-            name="playerName"
-            placeholder="Ingresa tu nombre de jugador"
-            maxLength={10}
-            minLength={3}
-            required
-          />
+        <div>
+          <JoinPlayerForm onFormSubmit={handleOnSubmit}/>
           <p>{message}</p>
-          <button type="submit">Crear</button>
-        </form>
+        </div>
       )}
     </main>
   );
