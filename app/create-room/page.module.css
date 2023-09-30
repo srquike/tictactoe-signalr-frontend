@@ -1,0 +1,8 @@
+.main {
+  display: grid;
+  place-items: center;
+  place-content: center;
+  align-self: start;
+  gap: 15px;
+  padding: 10px;
+}
