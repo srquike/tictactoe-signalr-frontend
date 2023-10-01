@@ -55,6 +55,7 @@ button {
   text-align: center;
   height: 36px;
   border: 0;
+  cursor: pointer;
 }
 
 p, h1 {

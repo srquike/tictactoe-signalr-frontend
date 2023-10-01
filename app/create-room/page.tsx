@@ -3,15 +3,19 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
-import JoinPlayerForm from "@/app/_components/JoinPlayerForm/JoinPlayerForm";
 
 export default function CreateRoom() {
   const [isCreating, setIsCreating] = useState(false);
-
+  const [isPrivateRoom, setIsPrivateRoom] = useState(false);
   const router = useRouter();
 
-  function handleOnSubmit(playerName: string) {
+  function handleOnClick() {
     setIsCreating(true);
+    router.push("/join-room");
+  }
+
+  function handleOnChange() {
+    setIsPrivateRoom((state) => !state);
   }
 
   return (
@@ -20,8 +24,19 @@ export default function CreateRoom() {
       {isCreating ? (
         <p>Creando sala, por favor espera...</p>
       ) : (
-        <div>
-          <JoinPlayerForm onFormSubmit={handleOnSubmit}/>
+        <div className={styles.main}>
+          <div>
+            <input
+              type="checkbox"
+              id="checkBoxPrivateRoom"
+              onChange={handleOnChange}
+            />
+            <label htmlFor="checkBoxPrivateRoom"> Sala privada</label>
+          </div>
+          {isPrivateRoom ? <input type="text" id="" /> : <></>}
+          <button type="button" onClick={handleOnClick}>
+            Crear
+          </button>
         </div>
       )}
     </main>
