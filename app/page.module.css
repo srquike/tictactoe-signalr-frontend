@@ -6,23 +6,3 @@
   gap: 15px;
   padding: 10px;
 }
-
-.table {
-  width: 700px;
-}
-
-.tableTh {
-  text-align: left;
-}
-
-@media screen and (max-width: 700px) {
-  .table {
-    width: 500px;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .table {
-    width: 100%;
-  }
-}
