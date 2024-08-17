@@ -1,11 +1,13 @@
 import { Dispatch, createContext, useContext, useReducer } from "react";
-import IGameState from "../interfaces/IGameState";
-import IGameAction from "../interfaces/IGameAction";
+import IGameState from "../_interfaces/IGameState";
+import IGameAction from "../_interfaces/IGameAction";
 
 const initialState: IGameState = {
   finished: false,
   players: [],
-  winner: null
+  winner: null,
+  currentPlayer: "O",
+  currentMove: 0,
 };
 
 const GameStateContext = createContext<IGameState | null>(null);
@@ -32,8 +34,21 @@ export function useGameDispatch() {
 
 function reducer(state: IGameState, action: IGameAction): IGameState {
   switch (action.name) {
-    case "value": {
-      return { ...state };
+    case "player-joined": {
+      return { ...state, players: action.payload.players };
+    }
+    case "square-selected": {
+      return {
+        ...state,
+        currentPlayer: action.payload.currentPlayer,
+        currentMove: action.payload.currentMove,
+      };
+    }
+    case "game-finished": {
+      return {
+        ...state,
+        finished: action.payload.finished,
+      };
     }
     default:
       throw Error("Unknown action: " + action.name);

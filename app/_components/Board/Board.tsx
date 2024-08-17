@@ -1,60 +1,39 @@
+import { useSignalRState } from "@/app/_contexts/SignalRContext";
 import Square from "../Square/Square";
+import styles from "./Board.module.css";
+import { usePlayerState } from "@/app/_contexts/PlayerContext";
+import { useGameState } from "@/app/_contexts/GameContext";
 
-export default function Board({ xIsNext, squares, onPlay }: Props) {
+type Props = {
+  squares: Array<string>;
+};
+
+export default function Board({ squares }: Props) {
+  const signalRState = useSignalRState();
+  const playerState = usePlayerState();
+  const gameState = useGameState();
+
   function handleOnSquareClick(squareIndex: number) {
-    if (calculateWinner(squares) || squares[squareIndex]) {
-      return;
-    }
-    const nextSquares = squares.slice();
-    if (xIsNext) {
-      nextSquares[squareIndex] = "X";
-    } else {
-      nextSquares[squareIndex] = "O";
-    }
-    onPlay(nextSquares);
-  }
-  const winner = calculateWinner(squares);
-  let status;
-  if (winner) {
-    status = "Winner: " + winner;
-  } else {
-    status = "Next player: " + (xIsNext ? "X" : "O");
+    signalRState
+      ?.send(
+        "SelectSquare",
+        playerState?.roomCode,
+        squareIndex,
+        playerState?.token
+      )
+      .catch((error: Error) => window.alert(error.message));
   }
 
   return (
-    <div>
+    <div className={styles.board}>
       {squares.map((square, index) => (
         <Square
+          key={index}
           value={square}
           onSquareClick={() => handleOnSquareClick(index)}
+          disabled={gameState?.currentPlayer === playerState?.token}
         />
       ))}
     </div>
   );
 }
-
-function calculateWinner(squares: Array<string>) {
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
-  for (let i = 0; i < lines.length; i++) {
-    const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
-    }
-  }
-  return null;
-}
-
-type Props = {
-  xIsNext: boolean;
-  squares: Array<string>;
-  onPlay: (nextSquares: Array<string>) => void;
-};

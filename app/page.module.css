@@ -3,6 +3,15 @@
   justify-items: start;
   place-content: center;
   align-self: start;
-  gap: 15px;
+  gap: 25px;
+  padding: 10px;
+}
+
+.game {
+  display: grid;
+  justify-items: center;
+  place-content: center;
+  align-self: start;
+  gap: 25px;
   padding: 10px;
 }

@@ -2,7 +2,7 @@
   display: grid;
   place-items: center;
   place-content: center;
-  gap: 15px;
+  gap: 10px;
 }
 
 .input {
@@ -13,4 +13,11 @@
   width: 275px;
   text-align: center;
   font-size: medium;
+}
+
+.section {
+  display: grid;
+  place-items: center;
+  place-content: center;
+  gap: 15px;
 }
